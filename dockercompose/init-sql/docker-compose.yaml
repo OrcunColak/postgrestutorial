@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  postgres-db:
+    image: postgres
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgconfig.conf:/usr/share/postgresql/postgresql.conf.sample
+      - ./initial-data.sql:/docker-entrypoint-initdb.d/initial-data.sql
