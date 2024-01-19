@@ -1,0 +1,14 @@
+# https://github.com/sofieneBK/Hands-on-debezium-cdc-with-springboot/blob/main/docker-compose.yml
+version: '3.8'
+services:
+  postgres-db:
+    image: postgres:15.3-alpine
+    container_name: postgres-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+
+
+
