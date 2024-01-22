@@ -1,6 +1,7 @@
 # https://github.com/sofieneBK/Hands-on-debezium-cdc-with-springboot/blob/main/docker-compose.yml
 version: '3.8'
 services:
+  # Database name is postgres  
   postgres-db:
     image: postgres:15.3-alpine
     container_name: postgres-db

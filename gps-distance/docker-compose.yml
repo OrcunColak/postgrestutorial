@@ -2,7 +2,7 @@
 version: "3.9"
 services:
   postgresql:
-    image: postgres
+    image: postgis/postgis:latest
     container_name: postgresql1
     restart: always
     environment:
