@@ -1,6 +1,7 @@
 -- Types are from https://phoenixnap.com/kb/postgresql-data-types
 create TABLE all_char_types_table (
-    char_column CHAR(10),                    -- Fixed-length character string
+    char_column1 BPCHAR(10),                    -- Fixed-length character string
+    char_column2 CHAR(10),                    -- Fixed-length character string
     varchar_column VARCHAR(255),             -- Variable-length character string with a maximum length of 255 characters
     text_column TEXT,                        -- Variable-length character string with no specified maximum length
     char_varying_column CHARACTER VARYING(20) -- Variable-length character string with a maximum length of 20 characters

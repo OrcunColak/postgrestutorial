@@ -1,4 +1,4 @@
--- CHAR and BPCHAR are aliases.
+-- CHAR and BPCHAR are aliases. BPCHAR is blank padded char
 -- They remove all blanks if possible during insertion. So they do not capture blanks and length() function may return a smaller number
 
 CREATE TABLE student (id INT, name BPCHAR(10), faculty CHAR(10));
