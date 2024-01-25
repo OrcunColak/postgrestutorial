@@ -1,4 +1,4 @@
-# docker-compose to create a table with all char types
+# psql -d db -U postgres
 version: "3.9"
 services:
   postgres-db:

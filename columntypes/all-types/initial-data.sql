@@ -19,26 +19,37 @@ create TABLE all_numeric_types_table (
     bigserial_column BIGSERIAL    -- 64-bit auto-incrementing integer . 1 to 9223372036854775807
 );
 
-CREATE TABLE datetime_types_table (
+create TABLE datetime_types_table (
+    -- Precision :
+    -- TIMESTAMP and TIMESTAMPTZ supports microsecond precision. However, there is an option for “rounding” of fractional digits for the seconds component.
+    -- To do this, we can specify a number between 0 and 6 inclusive in parenthesis after TIMESTAMP and TIMESTAMPTZ,
+    --  e.g. TIMESTAMP(3) for TIMESTAMP in millisecond precision allowing 3 fractional digits, or TIMESTAMPTZ(0) for TIMESTAMPTZ with no fractional digits.
+    -- This will get the values rounded to the specified precision.
+
+    -- The SQL standard requires that writing just timestamp be equivalent to timestamp without time zone, and PostgreSQL honors that behavior.
     timestamp_column TIMESTAMP(3),   -- Date and time with fractional seconds
+    -- timestamptz is accepted as an abbreviation for timestamp with time zone; this is a PostgreSQL extension.
     timestamptz_column TIMESTAMPTZ(6), -- Date and time with time zone information
+
+
+    timestamptz_column1 TIMESTAMP WITH TIME ZONE, -- Date and time with time zone information
     date_column DATE,             -- Date without a time component
     time_column TIME,             -- Time without a date component
     time_with_timezone_column time with time zone, -- Time with time zone
     interval_column INTERVAL       -- Time interval
 );
 
-CREATE TABLE binary_types_table (
+create TABLE binary_types_table (
     binary_data BYTEA
 );
 
-CREATE TABLE boolean_types_table (
+create TABLE boolean_types_table (
     is_active BOOLEAN
 );
 
 
 -- Define the enumerated type
-CREATE TYPE mood AS ENUM ('happy', 'sad', 'neutral');
+create type mood as ENUM ('happy', 'sad', 'neutral');
 
 -- Create a table with an enumerated type column
 CREATE TABLE person_mood (
@@ -90,7 +101,7 @@ CREATE TABLE array_types_table (
     timestamp_array TIMESTAMP[]
 );
 
-CREATE TABLE ranges_table (
+create TABLE ranges_table (
     id SERIAL PRIMARY KEY,
     int4_range int4range,
     int8_range int8range,
