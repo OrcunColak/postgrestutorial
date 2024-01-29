@@ -1,0 +1,16 @@
+# https://medium.com/@dmitry.romanoff/postgresql-version-15-error-permission-denied-for-schema-public-dc8285c41e00
+# For PostgreSQL version 15+ it is now necessary to grant permissions to a user explicitly.
+# psql -d db -U orcun
+version: "3.9"
+services:
+  postgres-db:
+    image: postgres
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init-user-db.sql:/docker-entrypoint-initdb.d/init-user-db.sql
