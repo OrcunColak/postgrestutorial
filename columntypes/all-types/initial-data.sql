@@ -7,17 +7,24 @@ create TABLE all_char_types_table (
     char_varying_column CHARACTER VARYING(20) -- Variable-length character string with a maximum length of 20 characters
 );
 
-create TABLE all_numeric_types_table (
+CREATE TABLE integer_types_table (
     smallint_column SMALLINT,        -- 16-bit signed integer . -32768 to +32767
     integer_column INTEGER,          -- 32-bit signed integer . -2147483648 to +2147483647
-    bigint_column BIGINT,            -- 64-bit signed integer. -9223372036854775808 to 9223372036854775807
-    decimal_column decimal,          -- Variable precision. Alias for NUMERIC . Up to 131072 digits before the decimal point. Up to 16383 digits after the decimal point
+	int4_column INT4,         	     -- Alias for INTEGER
+    bigint_column BIGINT,            -- 64-bit BIGINT integer. -9223372036854775808 to 9223372036854775807
+	int8_column INT8,         	     -- Alias for INTEGER
+    smallserial_column SMALLSERIAL,  -- 16-bit auto-incrementing integer . 1 to 32767
+    serial_column SERIAL,            -- 32-bit auto-incrementing integer. 1 to 2147483647
+    bigserial_column BIGSERIAL       -- 64-bit auto-incrementing integer . 1 to 9223372036854775807
+);
+
+create TABLE all_numeric_types_table (
+    decimal_column decimal,          -- Variable precision. Alias for NUMERIC . Up to 131072 digits before the decimal point. Up to 16383 digits after the decimal point. This corresponds to Oracle's NUMBER.
     numeric_column NUMERIC(10, 2),   -- Variable precision decimal with 10 digits, 2 of which are after the decimal point
     real_column REAL,                -- 32-bit floating-point . Variable precision decimal. 6 decimal digits precision
+	float4_column FLOAT4,			 -- Alias for REAL. This corresponds to Oracle's BINARY_FLOAT.
     double_column DOUBLE PRECISION,  -- 64-bit floating-point. Variable precision decimal. 15 decimal digits precision
-    smallserial_column SMALLSERIAL,-- 16-bit auto-incrementing integer . 1 to 32767
-    serial_column SERIAL,          -- 32-bit auto-incrementing integer. 1 to 2147483647
-    bigserial_column BIGSERIAL    -- 64-bit auto-incrementing integer . 1 to 9223372036854775807
+	float8_column FLOAT8			 -- Alias for DOUBLE PRECISION. This corresponds to Oracle's BINARY_DOUBLE.
 );
 
 create TABLE datetime_types_table (
