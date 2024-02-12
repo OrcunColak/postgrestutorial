@@ -28,22 +28,23 @@ create TABLE all_numeric_types_table (
 );
 
 create TABLE datetime_types_table (
+    date_column DATE,             -- Date without a time component
+    time_column TIME,             -- Time without a date component
+    time_with_timezone_column time with time zone, -- Time with time zone
+
+    -- The SQL standard requires that writing just timestamp be equivalent to timestamp without time zone, and PostgreSQL honors that behavior.
     -- Precision :
     -- TIMESTAMP and TIMESTAMPTZ supports microsecond precision. However, there is an option for “rounding” of fractional digits for the seconds component.
     -- To do this, we can specify a number between 0 and 6 inclusive in parenthesis after TIMESTAMP and TIMESTAMPTZ,
     --  e.g. TIMESTAMP(3) for TIMESTAMP in millisecond precision allowing 3 fractional digits, or TIMESTAMPTZ(0) for TIMESTAMPTZ with no fractional digits.
     -- This will get the values rounded to the specified precision.
-
-    -- The SQL standard requires that writing just timestamp be equivalent to timestamp without time zone, and PostgreSQL honors that behavior.
     timestamp_column TIMESTAMP(3),   -- Date and time with fractional seconds
+
+    timestamptz_column1 TIMESTAMP WITH TIME ZONE, -- Date and time with time zone information
+
     -- timestamptz is accepted as an abbreviation for timestamp with time zone; this is a PostgreSQL extension.
     timestamptz_column TIMESTAMPTZ(6), -- Date and time with time zone information
 
-
-    timestamptz_column1 TIMESTAMP WITH TIME ZONE, -- Date and time with time zone information
-    date_column DATE,             -- Date without a time component
-    time_column TIME,             -- Time without a date component
-    time_with_timezone_column time with time zone, -- Time with time zone
     interval_column INTERVAL       -- Time interval
 );
 
