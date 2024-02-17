@@ -1,0 +1,19 @@
+# https://dsysd-dev.medium.com/setting-up-your-own-postgres-database-using-docker-container-b46e5ee22d3a
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - my_network
+
+networks:
+  my_network:
