@@ -1,5 +1,8 @@
 -- https://medium.com/@dudkamv/nosql-capabilities-in-postgresql-9eec822886d9
 -- HStore is a key-value store within PostgreSQL, allowing it to handle schema-less data.
+
+CREATE EXTENSION IF NOT EXISTS hstore;
+
 CREATE TABLE products (
     id serial PRIMARY KEY,
     name text,
