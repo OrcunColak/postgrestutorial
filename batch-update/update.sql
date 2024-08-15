@@ -21,7 +21,8 @@ WITH updated_rows AS (
     FROM employees
     WHERE employee_id = 1
 )
+
 UPDATE employees
-SET salary = updated_rows.newsalary FROM updated_rows
-WHERE employees.employee_id = updated_rows.employee_id;
+  SET salary = updated_rows.newsalary FROM updated_rows
+  WHERE employees.employee_id = updated_rows.employee_id;
 
