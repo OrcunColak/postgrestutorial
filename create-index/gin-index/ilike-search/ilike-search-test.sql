@@ -1,3 +1,4 @@
+-- This example shows a like search without GIN index
 -- Create a sample table
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,

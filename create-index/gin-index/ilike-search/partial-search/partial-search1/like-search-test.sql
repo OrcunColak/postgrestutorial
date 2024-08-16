@@ -22,7 +22,7 @@ INSERT INTO users (first_name, last_name, email) VALUES
 ('Alice', 'Johnson', 'alice.johnson@example.com'),
 ('Bob', 'Williams', 'bob.williams@example.com');
 
--- Create a trigram index on the first_name column
+-- Create a gin index on the first_name column
 CREATE INDEX idx_users_first_name_trigram ON users USING gin(first_name gin_trgm_ops);
 
 -- Search for users whose first names contain 'jo' (case-insensitive)
