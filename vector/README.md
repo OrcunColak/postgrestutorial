@@ -9,7 +9,10 @@ To check the extension
 ```
 select * from pg_extension;
 ```
-Copy files
+Download files from
+https://github.com/YugabyteDB-Samples/openai-pgvector-lodging-service/tree/main/sql
+
+Copy files to docker
 ```
 docker cp airbnb_listings.sql postgresql:/home
 docker cp airbnb_listings_with_embeddings.csv postgresql:/home
