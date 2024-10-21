@@ -1,0 +1,38 @@
+# Connect as
+# jdbc:postgresql://localhost:6432/database1
+# jdbc:postgresql://localhost:6432/database2
+version: '3.8'
+
+services:
+  db1:
+    image: postgres:15
+    container_name: postgres_db1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: db
+    ports:
+      - "5432:5432"
+  
+  db2:
+    image: postgres:15
+    container_name: postgres_db2
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: db
+    ports:
+      - "5433:5432"
+  
+  pgbouncer:
+    image: edoburu/pgbouncer
+    container_name: pgbouncer
+    depends_on:
+      - db1
+      - db2
+    ports:
+      - "6432:6432"
+    volumes:
+      - ./pgbouncer/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini
+      - ./pgbouncer/userlist.txt:/etc/pgbouncer/userlist.txt
+
