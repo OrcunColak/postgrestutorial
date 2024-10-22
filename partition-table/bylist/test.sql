@@ -4,7 +4,9 @@ create table orders (
  user_id varchar(255),
  total numeric,
  order_items jsonb,
- status varchar(255)
+ status varchar(255),
+ PRIMARY KEY (order_id, status), -- Include 'status' in the primary key
+ UNIQUE (user_id, departments)  -- Include 'status' in the unique constraint
 ) partition by list (status);
 
 create table active_orders partition of orders for values in ('CREATED', 'SHIPPED', 'DELIVERED', 'CANCELLED');
