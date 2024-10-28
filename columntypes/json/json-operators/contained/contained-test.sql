@@ -1,0 +1,3 @@
+-- See https://medium.com/@mohammad.roshandelpoor/the-power-of-jsonb-in-postgresql-c249d6fdef4b
+--@>: Checks if a JSON document contains another JSON document.
+--<@: Checks if a JSON document is contained within another JSON document.

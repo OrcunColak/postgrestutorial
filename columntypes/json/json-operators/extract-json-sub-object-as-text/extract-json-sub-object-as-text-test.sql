@@ -1,0 +1,2 @@
+-- See https://medium.com/@mohammad.roshandelpoor/the-power-of-jsonb-in-postgresql-c249d6fdef4b
+-- #>>: Extracts a JSON sub-object as text.
