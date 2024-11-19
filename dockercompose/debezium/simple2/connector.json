@@ -1,0 +1,20 @@
+{
+  "name": "my-tariff-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.hostname": "tariffdb",
+    "database.port": "5432",
+    "database.user": "tariff_user",
+    "database.password": "password",
+    "database.dbname": "tariff",
+    "database.server.id": "1234",
+    "database.whitelist": "tariff",
+    "database.history.kafka.bootstrap.servers": "kafka:9092",
+    "database.history.kafka.topic": "debezium-history-topic",
+    "topic.prefix": "pg_tariff",
+    "table.whitelist": "public.products",
+    "decimal.handling.mode": "double",
+    "plugin.name": "pgoutput",
+    "include.schema.changes": "false"
+  }
+}
