@@ -13,7 +13,7 @@ INSERT INTO users (first_name, last_name, email) VALUES
 ('Johnny', 'Doe', 'john.doe@example.com'),
 ('Jane', 'Smith', 'jane.smith@example.com');
 
-   CREATE INDEX idx_user_search ON users USING gin(to_tsvector('english', first_name));
+CREATE INDEX idx_user_search ON users USING gin(to_tsvector('english', first_name));
 -- Another way is
 -- CREATE INDEX idx_user_search ON users USING gin(to_tsvector('english'::regconfig, first_name)) WHERE language = 'en';
 

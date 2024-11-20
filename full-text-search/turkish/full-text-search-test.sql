@@ -17,8 +17,8 @@ VALUES
     ('Ayşe', 'Kaya', 'ayse.kaya2@example.com'),
     ('Mustafa', 'Demir', 'mustafa.demir2@example.com');
 
-   CREATE INDEX idx_users_turkish_search
-      ON users USING gin(to_tsvector('turkish', first_name || ' ' || last_name));
+CREATE INDEX idx_users_turkish_search
+  ON users USING gin(to_tsvector('turkish', first_name || ' ' || last_name));
 
 
 SELECT *
