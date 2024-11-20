@@ -1,3 +1,9 @@
+# Limitations
+
+PostgreSQL supports FTS with tsvector data type and pg_trgm extension. tsvector type lets us extract lexemes from the
+documents and build indexes (GiST or GIN) on them. pg_trgm extension lets us extract trigrams from the text and then
+perform a fuzzy-match search on them.
+
 # Supported Languages
 
 See https://lazypro.medium.com/postgresql-full-text-search-in-a-nutshell-1efc744267d3

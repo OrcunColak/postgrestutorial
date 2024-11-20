@@ -1,5 +1,6 @@
 -- See https://towardsdev.com/how-to-build-a-postgresql-full-text-search-engine-in-any-language-60ec415f0b1d
 -- trigram can speed up ilike query.
+-- pg_trgm extension lets us extract trigrams from the text and then perform a fuzzy-match search on them.
 CREATE EXTENSION pg_trgm;
 
 select show_trgm('fielded');
