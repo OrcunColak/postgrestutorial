@@ -1,0 +1,82 @@
+# See https://blog.det.life/change-data-capture-cdc-comprehensive-guide-postgresql-to-s3-minio-using-nifi-113ecda10ea3
+version: '3.8'
+
+services:
+  # PostgreSQL service
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: debezium_user
+      POSTGRES_PASSWORD: debezium_pass
+      POSTGRES_DB: debezium_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgres_data:/var/lib/postgresql/data
+      - ./SQL/create.sql:/docker-entrypoint-initdb.d/init.sql
+    command: [ "postgres", "-c", "wal_level=logical" ]
+  
+  
+  # Kafka service
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.1
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    ports:
+      - "2181:2181"
+  
+  kafka:
+    image: confluentinc/cp-kafka:7.3.1
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      CONNECT_TOPIC_CREATION_ENABLE: 'true'
+    ports:
+      - "9092:9092"
+    volumes:
+      - kafka_data:/var/lib/kafka
+  
+  # Debezium Connect service
+  debezium:
+    image: debezium/connect:3.0.0.Final
+    ports:
+      - "8083:8083"
+    environment:
+      BOOTSTRAP_SERVERS: "kafka:9092"
+      GROUP_ID: "1"
+      CONFIG_STORAGE_TOPIC: "connect_configs"
+      OFFSET_STORAGE_TOPIC: "connect_offsets"
+      STATUS_STORAGE_TOPIC: "connect_statuses"
+      CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE: "false"
+      CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: "false"
+      CONNECT_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_DATABASE_HISTORY: "io.debezium.relational.history.KafkaDatabaseHistory"
+      CONNECT_DATABASE_HISTORY_KAFKA_TOPIC: "dbhistory.debezium"
+      CONNECTOR_PLUGINS_DIR: "/kafka/connect"
+      CONFIG_STORAGE_REPLICATION_FACTOR: "1"
+      STATUS_STORAGE_REPLICATION_FACTOR: "1"
+      REST_ADVERTISED_HOST_NAME: "medium_debezium"
+  
+  # http://localhost:8080
+  # Debezium UI service
+  debezium-ui:
+    image: debezium/debezium-ui:latest
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CONNECT_URIS: "http://debezium:8083"
+    depends_on:
+      - debezium
+  
+  
+
+
+volumes:
+  postgres_data:
+  kafka_data:
+  
